@@ -1,11 +1,8 @@
-version: 1.0.1
+version: 1.0.2
 files:
-  - url: >-
-      https://github.com/Miraiiiii/datacenter-auto-upload/releases/download/v1.0.1/datacenter-auto-upload_1.0.1.exe
-    sha512: >-
-      34eb5a9e884825aafccb205e0a50abcb4de075c85403deb13565b14a5b9c7ad659408d4a425246c81f5576d42d2393ff50ca22cb86db38d5d962495348c994b7
-    size: 77199874
-path: datacenter-auto-upload_1.0.1.exe
-sha512: >-
-  34eb5a9e884825aafccb205e0a50abcb4de075c85403deb13565b14a5b9c7ad659408d4a425246c81f5576d42d2393ff50ca22cb86db38d5d962495348c994b7
-releaseDate: '2024-11-21T09:34:46.217Z'
+  - url: 青木BI数据中心导入助手_1.0.2_setup.exe
+    sha512: aHxbmbVxO6C8W16vtiAAdFgRZOBh8maFkQZiNpmPkge0EtvuidVDeK2SB5ozZO9k1FiQoNT7xlC7mVgbgekMUQ==
+    size: 77199734
+path: 青木BI数据中心导入助手_1.0.2_setup.exe
+sha512: aHxbmbVxO6C8W16vtiAAdFgRZOBh8maFkQZiNpmPkge0EtvuidVDeK2SB5ozZO9k1FiQoNT7xlC7mVgbgekMUQ==
+releaseDate: '2024-11-21T09:59:56.422Z'
