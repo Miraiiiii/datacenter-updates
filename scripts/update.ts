@@ -7,7 +7,7 @@ async function calculateSha512(filePath: string): Promise<string> {
   const fileBuffer = await fs.readFile(filePath);
   const hashSum = crypto.createHash('sha512');
   hashSum.update(fileBuffer);
-  return hashSum.digest('base64');
+  return hashSum.digest('hex');
 }
 
 async function getFileSize(filePath: string): Promise<number> {
@@ -16,44 +16,53 @@ async function getFileSize(filePath: string): Promise<number> {
 }
 
 async function updateYml(exePath: string): Promise<void> {
-  const fileName = path.basename(exePath);
-  const publicDir = path.join(process.cwd(), 'public');
-  const ymlPath = path.join(publicDir, 'latest.yml');
+  try {
+    // 确保文件存在
+    await fs.access(exePath);
 
-  // 确保 public 目录存在
-  await fs.mkdir(publicDir, { recursive: true });
+    // 获取文件名
+    const fileName = path.basename(exePath);
+    
+    // 计算 SHA512
+    const sha512 = await calculateSha512(exePath);
+    
+    // 获取文件大小
+    const size = await getFileSize(exePath);
 
-  // 复制安装文件到 public 目录
-  await fs.copyFile(exePath, path.join(publicDir, fileName));
+    // 获取版本号（从文件名中提取）
+    const versionMatch = fileName.match(/\d+\.\d+\.\d+/);
+    if (!versionMatch) {
+      throw new Error('Version number not found in file name');
+    }
+    const version = versionMatch[0];
 
-  const sha512Value = await calculateSha512(exePath);
-  const sizeValue = await getFileSize(exePath);
+    // 构建 yml 内容
+    const ymlContent = {
+      version,
+      files: [
+        {
+          url: `https://github.com/Miraiiiii/datacenter-auto-upload/releases/download/v${version}/${fileName}`,
+          sha512,
+          size
+        }
+      ],
+      path: fileName,
+      sha512,
+      releaseDate: new Date().toISOString()
+    };
 
-  // 从版本号中提取版本信息
-  const versionMatch = fileName.match(/\d+\.\d+\.\d+/);
-  const version = versionMatch ? versionMatch[0] : '0.0.1';
-
-  const ymlContent = {
-    version,
-    files: [
-      {
-        url: fileName,
-        sha512: sha512Value,
-        size: sizeValue,
-      },
-    ],
-    path: fileName,
-    sha512: sha512Value,
-    releaseDate: new Date().toISOString(),
-  };
-
-  await fs.writeFile(ymlPath, yaml.dump(ymlContent, { lineWidth: -1 }));
-
-  console.log('✅ Update successful!');
-  console.log(`Version: ${version}`);
-  console.log(`SHA512: ${sha512Value}`);
-  console.log(`Size: ${sizeValue} bytes`);
-  console.log(`File: ${fileName}`);
+    // 将内容写入 latest.yml
+    const outputPath = path.join('public', 'latest.yml');
+    await fs.writeFile(outputPath, yaml.dump(ymlContent));
+    
+    console.log('✅ Successfully updated latest.yml');
+    console.log(`Version: ${version}`);
+    console.log(`File: ${fileName}`);
+    console.log(`SHA512: ${sha512}`);
+    console.log(`Size: ${size} bytes`);
+  } catch (err) {
+    throw new Error(`Failed to update yml: ${err instanceof Error ? err.message : String(err)}`);
+  }
 }
 
 // 从命令行参数获取 exe 路径
@@ -64,10 +73,7 @@ if (!exePath) {
   process.exit(1);
 }
 
-updateYml(exePath).catch((error) => {
-  console.error('❌ Error updating yml:', error);
-  process.exit(1);
-});
-  console.error('❌ Error updating yml:', error);
+updateYml(exePath).catch((err: Error) => {
+  console.error('❌ Error:', err.message);
   process.exit(1);
 });
