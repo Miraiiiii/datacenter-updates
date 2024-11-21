@@ -1,3 +1,5 @@
+// @ts-check
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // 配置 headers 允许跨域访问
@@ -25,4 +27,4 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+export default nextConfig
