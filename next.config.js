@@ -14,6 +14,15 @@ const nextConfig = {
       },
     ]
   },
+  // 禁用遥测
+  telemetry: false,
+  // 输出模式
+  output: 'standalone',
+  // 实验性功能
+  experimental: {
+    // 启用 app 目录
+    appDir: true,
+  },
 }
 
 module.exports = nextConfig
