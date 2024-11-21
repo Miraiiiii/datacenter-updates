@@ -1,0 +1,24 @@
+{
+  "name": "datacenter-updates",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "update": "ts-node scripts/update.ts"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^20.10.0",
+    "@types/react": "^18.2.39",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.3.2"
+  }
+}
