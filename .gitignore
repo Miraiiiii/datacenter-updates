@@ -37,6 +37,12 @@ next-env.d.ts
 .idea/
 .vscode/
 
-# All files in public except index.html
-/public/*
-!/public/index.html
+# Installer files
+/public/*.exe
+/public/*.blockmap
+/public/builder-debug.yml
+/public/builder-effective-config.yaml
+/public/win-unpacked/
+
+# Keep latest.yml in git
+!/public/latest.yml

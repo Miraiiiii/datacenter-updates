@@ -15,13 +15,16 @@ async function getFileSize(filePath: string): Promise<number> {
   return stats.size;
 }
 
-async function updateYml(exePath: string, releaseUrl: string): Promise<void> {
+async function updateYml(exePath: string): Promise<void> {
   const fileName = path.basename(exePath);
   const publicDir = path.join(process.cwd(), 'public');
   const ymlPath = path.join(publicDir, 'latest.yml');
 
   // 确保 public 目录存在
   await fs.mkdir(publicDir, { recursive: true });
+
+  // 复制安装文件到 public 目录
+  await fs.copyFile(exePath, path.join(publicDir, fileName));
 
   const sha512Value = await calculateSha512(exePath);
   const sizeValue = await getFileSize(exePath);
@@ -34,7 +37,7 @@ async function updateYml(exePath: string, releaseUrl: string): Promise<void> {
     version,
     files: [
       {
-        url: `${releaseUrl}/${fileName}`,
+        url: fileName,
         sha512: sha512Value,
         size: sizeValue,
       },
@@ -51,23 +54,20 @@ async function updateYml(exePath: string, releaseUrl: string): Promise<void> {
   console.log(`SHA512: ${sha512Value}`);
   console.log(`Size: ${sizeValue} bytes`);
   console.log(`File: ${fileName}`);
-  console.log('\n接下来的步骤：');
-  console.log('1. 创建 GitHub Release（标签：v${version}）');
-  console.log('2. 上传安装文件到 Release');
-  console.log('3. 提交 latest.yml 到仓库');
-  console.log('\n下载链接将是：${releaseUrl}/${fileName}');
 }
 
-// 从命令行参数获取 exe 路径和 release URL
-const [exePath, releaseUrl] = process.argv.slice(2);
-if (!exePath || !releaseUrl) {
-  console.error('❌ 请提供安装文件路径和 GitHub Release URL');
-  console.error('Usage: npm run update <path-to-exe> <release-url>');
-  console.error('Example: npm run update "path/to/app.exe" "https://github.com/Miraiiiii/datacenter-updates/releases/download/v1.0.0"');
+// 从命令行参数获取 exe 路径
+const exePath = process.argv[2];
+if (!exePath) {
+  console.error('❌ Please provide the path to the exe file');
+  console.error('Usage: npm run update <path-to-exe>');
   process.exit(1);
 }
 
-updateYml(exePath, releaseUrl).catch((error) => {
+updateYml(exePath).catch((error) => {
+  console.error('❌ Error updating yml:', error);
+  process.exit(1);
+});
   console.error('❌ Error updating yml:', error);
   process.exit(1);
 });
