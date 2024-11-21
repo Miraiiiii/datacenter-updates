@@ -2,11 +2,12 @@
   "name": "datacenter-updates",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "update": "ts-node scripts/update.ts"
+    "update": "node --loader ts-node/esm scripts/update.ts"
   },
   "dependencies": {
     "js-yaml": "^4.1.0",
