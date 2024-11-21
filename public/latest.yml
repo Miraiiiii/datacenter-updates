@@ -1,8 +1,8 @@
-version: 0.0.1
+version: 0.0.2
 files:
-  - url: datacenter-auto-upload_0.0.1_setup.exe
-    sha512: sMd6swoS+x7nGPo4T0jSZxZiEl2sDCtgwWM3xrzaPsQaayA4pI96HpdSy5v4UG01/mxqioBCQyI6Q9/Gv0xVUQ==
-    size: 77199864
-path: datacenter-auto-upload_0.0.1_setup.exe
-sha512: sMd6swoS+x7nGPo4T0jSZxZiEl2sDCtgwWM3xrzaPsQaayA4pI96HpdSy5v4UG01/mxqioBCQyI6Q9/Gv0xVUQ==
-releaseDate: '2024-11-21T10:30:56.684Z'
+  - url: datacenter-auto-upload_0.0.2_setup.exe
+    sha512: j8VutqN/hT90c+scZDasZiQWM2j2j88h10elanOKtOMJ0ZAt4TnLMR2WBHeFbp7cFgP5EBbxYnPX9rFyruSfDA==
+    size: 77199868
+path: datacenter-auto-upload_0.0.2_setup.exe
+sha512: j8VutqN/hT90c+scZDasZiQWM2j2j88h10elanOKtOMJ0ZAt4TnLMR2WBHeFbp7cFgP5EBbxYnPX9rFyruSfDA==
+releaseDate: '2024-11-21T10:40:11.387Z'
