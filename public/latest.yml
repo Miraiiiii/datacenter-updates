@@ -1,8 +1,8 @@
-version: 1.0.2
+version: 1.0.3
 files:
-  - url: 青木BI数据中心导入助手_1.0.2_setup.exe
-    sha512: aHxbmbVxO6C8W16vtiAAdFgRZOBh8maFkQZiNpmPkge0EtvuidVDeK2SB5ozZO9k1FiQoNT7xlC7mVgbgekMUQ==
-    size: 77199734
-path: 青木BI数据中心导入助手_1.0.2_setup.exe
-sha512: aHxbmbVxO6C8W16vtiAAdFgRZOBh8maFkQZiNpmPkge0EtvuidVDeK2SB5ozZO9k1FiQoNT7xlC7mVgbgekMUQ==
-releaseDate: '2024-11-21T09:59:56.422Z'
+  - url: datacenter-auto-upload_1.0.3_setup.exe
+    sha512: LbUWSUlVb7XPTcAQSNYCf9sUHO8597wboAcpgTHvKvR7wpabfnSFfi9ejD4srZTAxXGJJTh8qtcPi+tO+dQBKA==
+    size: 77199821
+path: datacenter-auto-upload_1.0.3_setup.exe
+sha512: LbUWSUlVb7XPTcAQSNYCf9sUHO8597wboAcpgTHvKvR7wpabfnSFfi9ejD4srZTAxXGJJTh8qtcPi+tO+dQBKA==
+releaseDate: '2024-11-21T10:08:17.541Z'
